@@ -80,7 +80,7 @@ Eigenschaften, die das Repo haben muss:
 | Netz-CI | `.github/workflows/network.yml`: wöchentlich (sonntags) und auf Abruf, Ubuntu, Python 3.13, `--strict`; nie bei Push | 2026-10-26 |
 | Drift-Vergleich | nach Dateiname, Zeilenenden normalisiert; `subsumption-demo.md` weicht gewollt ab; nur in der Engine vorhandene Beispiele werden genannt, zählen aber nicht | 2026-10-26 |
 | Namensgleichheit | Repo und Skript behalten ihre Namen; die README erklärt den Unterschied zum Engine-Befehl `amt-runner` | 2026-10-26 |
-| Standard-Ref der Engine | bleibt `main` (Entscheidung am 2026-10-26); die README zeigt `--ref v0.3.1` als Beispiel für reproduzierbare Läufe | 2026-10-26 |
+| Standard-Ref der Engine | bleibt `main` (Entscheidung am 2026-10-26); die README zeigt `--ref v0.7.0` als Beispiel für reproduzierbare Läufe (seit 0.6.0; vorher `v0.3.1`) | 2026-10-26 |
 | `requirements.txt` | genau eine Datei pro Repo; hier nur Kommentar (Laufzeit = Standardbibliothek) plus `pytest` für die Entwicklung | 2026-10-26 |
 | Engine-Pin | Standard bleibt `main`; das README-Beispiel zeigt `41620dd`; Pin auf Tags erst nach S5 (engine) | 2026-10-26 |
 | Ort des Pipeline-Reports | `build/pipeline_report.txt`, ignoriert | 2026-10-26 |
@@ -143,6 +143,7 @@ Entfällt: Das Repo veröffentlicht kein RDF. Die Beispieldateien sind Eingaben 
 | S9 | Release 0.4.0 (Version, CHANGELOG, Pinning-Beispiel `v0.5.0`), Tag, GitHub-Release, Zenodo (Gegenstück zu S18 in `amt-engine`) | amt-runner | S8 | 9a und 9b erledigt (Tag `v0.4.0`, Release, Zenodo); 9c als Patch geliefert |
 | S10 | Adressen auf `alpaca-fair-framework` umstellen (`AMT_REPO_URL`, `EXPLORER_URL`, `HOWTO_URL`, `CITATION.cff`, README, `drift`); Gegenstück zu S19 in `amt-engine` | amt-runner | S9 | erledigt 2026-10-30 |
 | S11 | Hextupel: Beispiel samt `.md`, README-Abschnitt, Hinweis auf die Mindestversion der Engine; Release 0.5.0 samt Zenodo; Gegenstück zu S21 bis S23 in `amt-engine` | amt-runner | S10, Engine S21 | 11a und 11b erledigt (Tag `v0.5.0`, Release, Zenodo); 11c als Patch geliefert |
+| S12 | Release 0.6.0 zur Engine 0.7.0 (`fw:Certainty`): README, Pinning-Beispiel `v0.7.0`, Versionen; Tag, GitHub-Release, Zenodo; Gegenstück zu S25 und S27 in `amt-engine` | amt-runner | S11, Engine S27 | 12a als Patch geliefert 2026-11-05; 12b und 12c offen |
 
 S2 bis S5 sind erledigt. Offen bleiben die Punkte in Teil D.
 
@@ -326,6 +327,18 @@ Status ist `offen`, `erledigt <Datum>` oder `hinfällig`. Schritt-IDs werden nie
 - 11b (durch den Autor): Commit `f18f360` (Release-Patch), Folgecommit `eb6adb1`, annotierter Tag `v0.5.0` auf `eb6adb1`, GitHub-Release, Zenodo. Versions-DOI Runner 0.5.0: `10.5281/zenodo.23809732`; die Concept-DOI `10.5281/zenodo.23669557` bleibt.
 - Zwischenfall: im lokalen Checkout des Autors fehlten `animals.ttl`, `subsumption-demo.ttl` und `SKOSconceptExample.ttl` schon vor dem Einspielen (`git status` zeigte `D`, `smoke` meldete „Input file not found: animals.ttl“). `git add -A` hat die Löschungen in `f18f360` mit aufgenommen (12 statt der erwarteten 9 Einträge). Behoben mit `git checkout 5802352 -- <drei Dateien>` und Folgecommit `eb6adb1`; der Tag wurde erst danach gesetzt. Regel: vor `git add -A` muss `git status --short` genau die in der `PATCH-README.md` genannten Einträge zeigen, und ein roter Schritt (hier `smoke`) wird vor dem Commit geklärt.
 - 11c (Patch): die Versions-DOI in README (Abschnitt „Citation“) und unter `[Unreleased]` im CHANGELOG.
+
+## S12 – Release 0.6.0 zur Engine 0.7.0
+
+**Ziel:** Der Runner passt zur Engine 0.7.0 (`fw:Certainty`) und ist als 0.6.0 veröffentlicht und archiviert.
+
+**Befund:** Der Wrapper liest weder Typ noch Methode und hat keine Wrapper-Logik für `fw:Certainty` nötig; die Beispiele der Engine sind unverändert (`drift` bleibt gleich). Es ändern sich Version, README und Pinning-Beispiel.
+
+**Inhalt (12a):** Version 0.6.0 in `run_amt.py`, `py/amt_runner_dev_utils.py` (`RELEASE`, `RELEASE_DATE` 2026-11-05), `CITATION.cff` und `CHANGELOG.md` (`[0.6.0] - 2026-11-05`, Vergleichslinks); README: `fw:Certainty` im Abschnitt zu Typ und Methode (Mindestversion 0.7.0, `AMT-W206`), Pinning-Beispiel und Hinweis auf den aktuellen Tag `v0.7.0`; Beschlusszeile zum Pinning angepasst.
+
+**12b (manuell, nach dem Push von 12a):** Tag `v0.6.0`, GitHub-Release, Zenodo-Archiv. **12c (Patch):** die Versions-DOI in README („Citation“) und unter `[Unreleased]` im CHANGELOG.
+
+**Abnahme:** `python main.py --strict` zweimal grün; `python main.py --only drift` grün (Beispiele unverändert); `python run_amt.py hextuple-demo.ttl --update` läuft gegen die Engine 0.7.0; eine Datei mit `fw:Certainty` läuft durch und die Ausgabe enthält den Typ. Regel aus S11: vor `git add` muss `git status --short` genau die in der `PATCH-README.md` genannten Einträge zeigen.
 
 ## Teil D – Offene Punkte
 

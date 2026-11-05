@@ -13,8 +13,15 @@ release published on GitHub and archived on Zenodo.
 
 ## [Unreleased]
 
+## [0.6.0] - 2026-11-05
+
+0.6.0 goes with AMT.engine 0.7.0, which adds the statement type `fw:Certainty`. The arguments of a run and its output
+files are the same; the wrapper itself does not read the type.
+
 ### Changed
 
+- `README.md`: the section on type and method names `fw:Certainty` (engine 0.7.0 or newer, `AMT-W206`); the pinning
+  example and the note on the current tag now say `v0.7.0` (before: `v0.6.0`), as does the usage line in `run_amt.py`.
 - `README.md`, "Citation": names the version DOI of 0.5.0,
   `10.5281/zenodo.23809732`. The concept DOI is unchanged.
 
@@ -178,7 +185,8 @@ and continuous integration.
   `PotterAttributionExample`, `SKOSconceptExample`.
 - README with quickstart, output layout and an expected-output walkthrough.
 
-[Unreleased]: https://github.com/alpaca-fair-framework/amt-runner/compare/v0.5.0...HEAD
+[Unreleased]: https://github.com/alpaca-fair-framework/amt-runner/compare/v0.6.0...HEAD
+[0.6.0]: https://github.com/alpaca-fair-framework/amt-runner/compare/v0.5.0...v0.6.0
 [0.5.0]: https://github.com/alpaca-fair-framework/amt-runner/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/alpaca-fair-framework/amt-runner/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/alpaca-fair-framework/amt-runner/compare/v0.2.1...v0.3.0

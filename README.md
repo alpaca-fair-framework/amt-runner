@@ -160,7 +160,7 @@ the top of `animals.ttl` for the full reasoning.
 ## Statements with type and method: `hextuple-demo.ttl`
 
 A statement can say more than its weight. With `fw:hasType` it says what kind of fuzziness the weight
-expresses (`fw:Vagueness`, `fw:Uncertainty`, `fw:FuzzinessWobbliness`), with `fw:hasMethod` how it was obtained.
+expresses (`fw:Vagueness`, `fw:Uncertainty`, `fw:FuzzinessWobbliness`, and from engine 0.7.0 `fw:Certainty`), with `fw:hasMethod` how it was obtained.
 Both are optional; a statement without a type is a vagueness statement. [`hextuple-demo.ttl`](hextuple-demo.ttl)
 shows every case on a small coin example, and [`hextuple-demo.md`](hextuple-demo.md) lists the derivations the
 engine adds (a method and a type on every derived statement).
@@ -171,6 +171,10 @@ python run_amt.py hextuple-demo.ttl --update
 
 This needs **AMT.engine 0.6.0 or newer**. An older engine ignores type and method; `--update` fetches the
 current one into `.amt-cache/`. The wrapper itself does not read these properties.
+
+`fw:Certainty` marks a statement that is not fuzzy at all (weight 1.0). It needs **AMT.engine 0.7.0 or newer**: an older
+engine does not know the term. A derived statement of certain edges is certain too, and the engine warns (`AMT-W206`)
+if a `fw:Certainty` statement has a weight below 1. The wrapper passes the engine's output through as it is.
 
 ## Expected output
 
@@ -297,13 +301,13 @@ Everything else is forwarded to `amt.runner` — `--no-check`, `--no-report`,
 
 Pinning is the right move for reproducible pipelines. Branches, commit SHAs
 and tags all work; the engine publishes a tag for every release (`v0.3.1` was
-the first one that is archived on Zenodo, `v0.6.0` is the current one). The cache is
+the first one that is archived on Zenodo, `v0.7.0` is the current one). The cache is
 cloned shallow, so a ref other than the tip of `main` is not in it at first;
 the script notices and fetches the rest of the history on demand rather than
 failing:
 
 ```bash
-python run_amt.py animals.ttl --ref v0.6.0
+python run_amt.py animals.ttl --ref v0.7.0
 python run_amt.py animals.ttl --ref 41620dd1e9f57bfbb3f4db543853aec8ecd2a906
 ```
 
@@ -365,7 +369,7 @@ amt-runner/
 ├── run_amt.py          # the wrapper script (self-contained, copy it freely)
 ├── animals.ttl         # demo input, with animals.md
 ├── subsumption-demo.ttl  # demo input for --minimal, with subsumption-demo.md
-├── hextuple-demo.ttl   # demo input with type and method (needs engine 0.6.0), with hextuple-demo.md
+├── hextuple-demo.ttl   # demo input with type and method (needs engine 0.6.0; `fw:Certainty` needs 0.7.0), with hextuple-demo.md
 ├── PotterAttributionExample.ttl  # demo input, with a companion .md
 ├── SKOSconceptExample.ttl        # demo input, with a companion .md
 ├── main.py             # development pipeline (see "Development")
@@ -491,6 +495,7 @@ Every release is archived on Zenodo.
 
 - All versions (always resolves to the latest): <https://doi.org/10.5281/zenodo.23669557>
 - Version 0.5.0: <https://doi.org/10.5281/zenodo.23809732>
+- Version 0.6.0: the version DOI follows with the Zenodo archive of the release
 - Version 0.4.0: <https://doi.org/10.5281/zenodo.23695549>
 - Version 0.3.0: <https://doi.org/10.5281/zenodo.23688616>
 - Version 0.2.1: <https://doi.org/10.5281/zenodo.23669558>
