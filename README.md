@@ -495,7 +495,7 @@ Every release is archived on Zenodo.
 
 - All versions (always resolves to the latest): <https://doi.org/10.5281/zenodo.23669557>
 - Version 0.5.0: <https://doi.org/10.5281/zenodo.23809732>
-- Version 0.6.0: the version DOI follows with the Zenodo archive of the release
+- Version 0.6.0: <https://doi.org/10.5281/zenodo.23971157>
 - Version 0.4.0: <https://doi.org/10.5281/zenodo.23695549>
 - Version 0.3.0: <https://doi.org/10.5281/zenodo.23688616>
 - Version 0.2.1: <https://doi.org/10.5281/zenodo.23669558>

@@ -13,6 +13,11 @@ release published on GitHub and archived on Zenodo.
 
 ## [Unreleased]
 
+### Changed
+
+- `README.md`, "Citation": names the version DOI of 0.6.0,
+  `10.5281/zenodo.23971157`. The concept DOI is unchanged.
+
 ## [0.6.0] - 2026-11-05
 
 0.6.0 goes with AMT.engine 0.7.0, which adds the statement type `fw:Certainty`. The arguments of a run and its output
